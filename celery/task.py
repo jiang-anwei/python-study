@@ -12,6 +12,12 @@ app.config_from_object("celeryconfig")
 # 不关心结果
 # @app.task(ignore_result=True)
 @app.task
-def task(x, y):
+def multiplication_task(x, y):
     time.sleep(1)
     return x * y
+
+
+@app.task
+def add_task(x, y):
+    time.sleep(1)
+    return x + y

@@ -2,7 +2,11 @@ from task import *
 import time
 
 start = time.time()
-for i in range(10):
-    result = task.delay(i, i)
-    print result.get()
+addresult = [add_task.delay(i, i) for i in range(10)]
+mult_result = [multiplication_task.delay(i, i) for i in range(20)]
+
+for re in addresult:
+    print re.get()
+for re in mult_result:
+    print re.get()
 print "cost:{}".format(str(time.time() - start))
