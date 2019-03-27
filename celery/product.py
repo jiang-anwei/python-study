@@ -1,5 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from task import *
 import time
+
 
 start = time.time()
 addresult = [add_task.delay(i, i) for i in range(10)]

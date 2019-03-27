@@ -5,6 +5,11 @@ from kombu import Exchange, Queue
 BROKER_URL = "redis://172.16.101.24:6379/1"
 CELERY_RESULT_BACKEND = "redis://172.16.101.24:6379/2"
 
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_RESULT_EXPIRES = 24 * 60 * 60
+
+# 如果任务没有在 可见性超时 内确认接收，任务会被重新委派给另一个职程并执行。
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 
 # 内存泄漏
