@@ -18,8 +18,9 @@ class CalculationTask(Task):
         print 'task fail, reason: {0}'.format(exc)
         return super(CalculationTask, self).on_failure(exc, task_id, args, kwargs, einfo)
 
-    # 不关心结果
-    # @app.task(ignore_result=True)
+
+# 不关心结果
+# @app.task(ignore_result=True)
 
 
 @app.task(bind=True, max_retries=3, default_retry_delay=1 * 6)
@@ -36,3 +37,8 @@ def multiplication_task(self, x, y):
 def add_task(x, y):
     time.sleep(1)
     return x + y
+
+
+@app.task
+def sum_all(x=None):
+    return sum(x)
