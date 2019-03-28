@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from celery import Celery, platforms, Task
+from celery import Celery, platforms, Task, chain
 import time
 
 platforms.C_FORCE_ROOT = True
@@ -22,11 +22,14 @@ class CalculationTask(Task):
     # @app.task(ignore_result=True)
 
 
-@app.task(base=CalculationTask)
-def multiplication_task(x, y):
-    time.sleep(1)
-    raise Exception("test")
-    return x * y
+@app.task(bind=True, max_retries=3, default_retry_delay=1 * 6)
+def multiplication_task(self, x, y):
+    try:
+        time.sleep(1)
+        # raise Exception("test")
+        return x * y
+    except Exception as exc:
+        self.retry(exc=exc, countdown=10)
 
 
 @app.task(base=CalculationTask)
