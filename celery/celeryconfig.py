@@ -9,9 +9,13 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_RESULT_EXPIRES = 24 * 60 * 60
 
+# Timezone
+CELERY_TIMEZONE = 'Asia/Shanghai'  # 指定时区，不指定默认为 'UTC'
 # 如果任务没有在 可见性超时 内确认接收，任务会被重新委派给另一个职程并执行。
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
-
+# 可以让你的Celery更加可靠，只有当worker执行完任务后，才会告诉MQ，消息被消费。
+# 另外根据资料，需要设置为True才能实现优先级，但优先级并未生效--实现失败
+CELERY_ACKS_LATE = True
 # 内存泄漏
 # 长时间运行Celery有可能发生内存泄露，可以像下面这样设置
 
