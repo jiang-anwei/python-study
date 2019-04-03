@@ -25,12 +25,12 @@ CELERYD_MAX_TASKS_PER_CHILD = 40  # 每个worker执行了多少任务就会死�
 CELERY_QUEUES = (
     Queue("default", Exchange("default"), routing_key="default"),
     Queue("multiplication_task_queue", Exchange("multiplication_task"), routing_key="multiplication_task"),
-    # Queue("sum_all", Exchange("sum_all"), routing_key="sum_all"),
+    Queue("sum_all", Exchange("sumALl"), routing_key="sum_all"),
     Queue("add_task_queue", Exchange("add_task"), routing_key="add_task")
 )
 
 CELERY_ROUTES = {
     'task.multiplication_task': {"queue": "multiplication_task_queue", "routing_key": "multiplication_task"},
-    # 'task.sum_all': {"queue": "sum_all", "routing_key": "sum_all"},
+    'task.sum_all': {"queue": "sum_all", "routing_key": "sum_all"},
     'task.add_task': {"queue": "add_task_queue", "routing_key": "add_task"}}
 # celery -A proj worker --loglevel=INFO --concurrency=10 -n worker1.%h -Q for_task
