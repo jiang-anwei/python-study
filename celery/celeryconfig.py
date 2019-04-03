@@ -25,7 +25,7 @@ CELERYD_MAX_TASKS_PER_CHILD = 40  # 每个worker执行了多少任务就会死�
 CELERY_QUEUES = (
     Queue("default", Exchange("default"), routing_key="default"),
     Queue("multiplication_task_queue", Exchange("multiplication_task"), routing_key="multiplication_task"),
-    Queue("sum_all", Exchange("sumALl"), routing_key="sum_all"),
+    Queue("sum_all", Exchange("sum_all"), routing_key="sum_all"),
     Queue("add_task_queue", Exchange("add_task"), routing_key="add_task")
 )
 
