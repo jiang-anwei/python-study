@@ -39,6 +39,6 @@ def add_task(x, y):
     return x + y
 
 
-@app.task
+@app.task(queue="sumALl")
 def sum_all(x=None):
     return sum(x)
