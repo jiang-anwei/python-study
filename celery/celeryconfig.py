@@ -34,3 +34,4 @@ CELERY_ROUTES = {
     'task.sum_all': {"queue": "sum_all", "routing_key": "sum_all"},
     'task.add_task': {"queue": "add_task_queue", "routing_key": "add_task"}}
 # celery -A proj worker --loglevel=INFO --concurrency=10 -n worker1.%h -Q for_task
+# flower -A task --address=127.0.0.1 --port=5555
